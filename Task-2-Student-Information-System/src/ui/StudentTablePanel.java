@@ -43,14 +43,30 @@ public class StudentTablePanel extends JPanel {
 
         table = new JTable(tableModel);
 
-        table.setRowHeight(25);
+        table.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        table.setRowHeight(32);
+        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+        table.getTableHeader().setPreferredSize(new Dimension(0, 35));
+
+        // Selection
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        // Enable Sorting
         table.setAutoCreateRowSorter(true);
+
+        // Disable Column Reordering
         table.getTableHeader().setReorderingAllowed(false);
 
+        // Fill Empty Space
         table.setFillsViewportHeight(true);
-    }
 
+        // Grid Appearance
+        table.setShowGrid(true);
+        table.setGridColor(Color.LIGHT_GRAY);
+
+        // Cell Spacing
+        table.setIntercellSpacing(new Dimension(5, 5));
+    }
     public void loadStudents(List<Student> students) {
 
     clearTable();
@@ -72,30 +88,30 @@ public class StudentTablePanel extends JPanel {
     }
 }
 
-private void clearTable() {
+    private void clearTable() {
 
-    tableModel.setRowCount(0);
-}
+        tableModel.setRowCount(0);
+    }
 
-public int getSelectedStudentId() {
+    public int getSelectedStudentId() {
 
-    int row = table.getSelectedRow();
+        int row = table.getSelectedRow();
 
-    if (row == -1)
-        return -1;
+        if (row == -1)
+            return -1;
 
-    int modelRow = table.convertRowIndexToModel(row);
+        int modelRow = table.convertRowIndexToModel(row);
 
-    return (Integer) tableModel.getValueAt(modelRow, 0);
-}
+        return (Integer) tableModel.getValueAt(modelRow, 0);
+    }
 
-public JTable getTable() {
-    return table;
-}
+    public JTable getTable() {
+        return table;
+    }
 
-public boolean isEmpty() {
+    public boolean isEmpty() {
 
-    return tableModel.getRowCount() == 0;
-}
+        return tableModel.getRowCount() == 0;
+    }
 
 }
